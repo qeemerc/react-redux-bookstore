@@ -1,28 +1,75 @@
-.App {
-  text-align: center;
+ul {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+ul li{
+  list-style-type: none;
 }
 
 .App-header {
   background-color: #222;
-  height: 150px;
   padding: 20px;
   color: white;
+  margin-bottom: 25px;
 }
 
-.App-title {
-  font-size: 1.5em;
+header a {
+  display: inline-block;
+  margin: 0px 20px 0px 0px;
+  color: #fff;
+  text-decoration: none;
 }
 
-.App-intro {
-  font-size: large;
+header a:hover {
+  color: #ffd921;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+header a.active {
+  color: #ffd921;
+}
+
+.book-item{
+  width: 25%;
+  display: inline-block;
+  margin-right: 2.5%;
+  margin-bottom: 25px;
+}
+
+.latest-book-item{
+  width: 30%;
+  text-align: center;
+  display: inline-block;
+  margin-right: 2.5%;
+  margin-bottom: 25px;
+}
+
+.latest-book-item img{
+  max-height: 300px;
+}
+
+.book-item img {
+  max-height: 300px;
+}
+
+.book-info{
+  margin-top: 25px;
+}
+
+.filter-input{
+  margin-top: 15px;
+}
+
+.cart-info{
+  margin-top: 25px;
+  text-align: center;
+}
+
+.total{
+  margin-bottom: 15px;
+}
+
+.latest-book-title{
+  text-align: center;
+  font-weight: bold;
 }

@@ -11,3 +11,4 @@ Libs:
 * Redux-logger
 * Axios
 * Reselect
+* Semantic UI

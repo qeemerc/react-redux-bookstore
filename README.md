@@ -1,5 +1,5 @@
 # react-redux-bookstore
-Bookstore app with React, Redux, Router - [Live Demo](https://qeemerc.github.io/react-redux-bookstore)
+Bookstore app with React, Redux, Router - [Live Demo](https://react-redux-bookstore.netlify.com)
 
 **Libs:**
 

@@ -75,7 +75,4 @@ const mapDispatchToProps = {
   loadCategories
 }
 
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(Books)
+export default connect(mapStateToProps, mapDispatchToProps)(Books)

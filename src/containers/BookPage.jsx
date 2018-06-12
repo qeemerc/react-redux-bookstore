@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchBookById } from '../actions/bookPage'
-import Book from '../components/Book'
 import { Link } from 'react-router-dom'
 import { Container, Grid, Item, Label, Card, Image, Button, Icon, Loader } from 'semantic-ui-react'
 import { getLoadedBook, getLatestBooksFromHistory } from '../selectors/bookPage'
-
 
 class BookPage extends Component {
 
@@ -15,7 +13,7 @@ class BookPage extends Component {
 
   componentDidUpdate() {
     if(this.props.book) {
-      if (this.props.book.id !== (+this.props.match.params.id)){
+      if (this.props.book.id != (+this.props.match.params.id)){
         this.props.fetchBookById(this.props.match.params.id)
       }
     }
@@ -27,6 +25,7 @@ class BookPage extends Component {
 
     return (
         <div className="book-info">
+
           <Button color="grey" className="back-btn" onClick={history.goBack} animated>
             <Button.Content visible>Back</Button.Content>
             <Button.Content hidden>
@@ -57,44 +56,42 @@ class BookPage extends Component {
   renderBookCopies() {
     const { book, match, latestBooks } = this.props
     if (!book || book.id != match.params.id ) return false
-    console.log(latestBooks)
     return (
         <ul>
           <p className="latest-book-title">История просмотров</p>
           { latestBooks.map((book, index) => {
             if (index <= 2) {
               return (
-              <li key={index} className="latest-book-item">
-                <Card>
-                <Image src={book.image} size="medium" />
-                <Card.Content>
-                    <Card.Header>
-                      {book.title}
-                    </Card.Header>
-                    <Card.Meta>
-                      <span className='date'>
-                        {book.author}
-                      </span>
-                    </Card.Meta>
-                    <Card.Description>
+                <li key={index} className="latest-book-item">
+                  <Card>
+                  <Image src={book.image} size="medium" />
+                  <Card.Content>
+                      <Card.Header>
+                        {book.title}
+                      </Card.Header>
+                      <Card.Meta>
+                        <span className='date'>
+                          {book.author}
+                        </span>
+                      </Card.Meta>
+                      <Card.Description>
 
-                        <Link to={`${book.id}`}><Button>Подробнее</Button></Link>
+                          <Link to={`${book.id}`}><Button>Подробнее</Button></Link>
 
-                    </Card.Description>
-                  </Card.Content>
-              </Card>
-              </li>
+                      </Card.Description>
+                    </Card.Content>
+                  </Card>
+                </li>
               )
             }
-
           }) }
         </ul>
     )
   }
 
   render(){
-    const { book, latestBook } = this.props
-    console.log(book, latestBook)
+    const { book } = this.props
+    console.log(book)
     return (
       <Container>
         <Grid>
@@ -109,9 +106,7 @@ class BookPage extends Component {
       </Container>
     )
   }
-
 }
-
 
 const mapStateToProps = (state) => ({
   book: getLoadedBook(state),

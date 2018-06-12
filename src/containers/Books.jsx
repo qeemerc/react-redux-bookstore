@@ -1,78 +1,88 @@
 import React, { Component } from 'react';
-import {compose} from 'redux'
-import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { createSelector } from 'reselect'
 
 import Sidebar from "../components/Sidebar"
 import Book from "../components/Book"
 import { Container, Grid, Loader } from 'semantic-ui-react'
 
-import { loadBooks } from '../actions/books'
+import { loadBooks, loadMoreBooks } from '../actions/books'
 import { loadCategories } from '../actions/filter'
 import { searchBook } from '../selectors/books'
-import { getCategories } from '../selectors/filter'
 
 class Books extends Component {
 
   componentDidMount (){
     this.props.loadBooks()
     this.props.loadCategories()
+    this.scrollBooks = window.addEventListener('scroll', (e) => {
+      if(this.scroller){
+        this.handleScroll(e)
+      }
+    })
+  }
+
+  handleScroll = (e) => {
+    const lastLi = document.querySelector("ul > li:last-child")
+    const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight
+    const pageOffset = window.pageYOffset + window.innerHeight
+    const bottomOffset = 10
+    if (pageOffset > lastLiOffset - bottomOffset && !this.props.isLoading) this.props.loadMoreBooks(20)
   }
 
   renderBooks() {
 
-    const { books } = this.props
-
-    if (!books) return <Loader active inline='centered' />
+    const { books, isLoading, isLoaded } = this.props
 
     if (books.length < 1) return <p>Ничего не найдено...</p>
 
     return (
-      <ul>
-        { books.map( (book) => {
-          return (
-            <li key={book.id} className="book-item">
-              <Book book={book} />
-            </li>
-          )
-        })}
-      </ul>
-    )
-  }
-
-  renderSidebar() {
-    return (
-      <Sidebar />
+      <div>
+        <ul>
+          { 
+            books.map( (book, index) => {
+              return (
+                <li key={index} className="book-item">
+                  <Book book={book} />
+                </li>
+              )
+            })
+          }
+        </ul>
+        {isLoading ? <Loader active inline='centered' /> : false}
+      </div>
+  
     )
   }
 
   render() {
-    console.log("PROPS BOOKS", this.props.books)
     return (
-      <Container>
-        <Grid>
-          <div className="column thirteen wide">
-            { this.props.isLoadedBooks && this.renderBooks() }
-          </div>
-          <div className="column three wide">
-            { this.props.isLoadedCategories && this.renderSidebar() }
-          </div>
-        </Grid>
-      </Container>
+      <div ref={scroller => this.scroller = scroller}>
+        <Container>
+          <Grid>
+            <div className="column thirteen wide">
+              { this.props.isLoadedBooks ? this.renderBooks() : <Loader active inline='centered' /> }
+            </div>
+            <div className="column three wide">
+              { this.props.isLoadedCategories && <Sidebar /> }
+            </div>
+          </Grid>
+        </Container>
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
   books: searchBook(state),
+  isLoading: state.books.isLoading,
   isLoadedBooks: state.books.isLoaded,
   isLoadedCategories: state.filter.isLoaded
 })
 
 const mapDispatchToProps = {
   loadBooks,
-  loadCategories
+  loadCategories,
+  loadMoreBooks
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Books)

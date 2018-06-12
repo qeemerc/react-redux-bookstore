@@ -1,14 +1,23 @@
 import axios from "axios"
 import * as actionTypes from "../actionTypes"
 
-
 export const loadCategories = () => dispatch => {
-  axios('/categories.json').then( ({data}) => {
-      dispatch({
-        type: actionTypes.LOAD_CATEGORIES,
-        payload: data
-      })
+  dispatch({
+    type: actionTypes.LOAD_CATEGORIES_START
   })
+
+  axios.get('https://5b1f792317cc7000142ed492.mockapi.io/bookstore/categories').then( ({data}) => {
+    dispatch({
+      type: actionTypes.LOAD_CATEGORIES_SUCCESS,
+      payload: data
+    })
+  }).catch((error) => {
+    dispatch({
+      type: actionTypes.LOAD_CATEGORIES_FAILURE,
+      payload: error.response
+    })
+  })
+
 }
 
 export const setFilter = (filter) => dispatch => {

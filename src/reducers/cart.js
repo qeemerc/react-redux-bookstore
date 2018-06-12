@@ -1,7 +1,8 @@
 import * as actionTypes from '../actionTypes'
 
 const initialState = {
-  books: []
+  books: [],
+  payData: null
 }
 
 export default (state = initialState, {type, payload}) => {
@@ -17,8 +18,8 @@ export default (state = initialState, {type, payload}) => {
         books: []
       }
     case actionTypes.CHECK_OUT:
+      console.log(payload)
       return {
-        ...state,
         books: [],
         payData: payload
       }

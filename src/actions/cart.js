@@ -1,7 +1,6 @@
 import * as actionTypes from "../actionTypes"
 
 export const addBookToCart = (book) => dispatch => {
-
   const bookItem = {
     ...book,
     count: 1

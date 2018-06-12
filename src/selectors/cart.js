@@ -34,7 +34,9 @@ export const getCartItems = createSelector(
         data[book.id].count++;
         return data;
       }, [])
-      return booksData
+
+      //Фильтр пустых значений массива
+      return booksData.filter((i) => i !== undefined )
     }
   }
 )

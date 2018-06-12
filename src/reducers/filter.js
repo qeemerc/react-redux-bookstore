@@ -9,12 +9,18 @@ const initialState = {
 
 export default (state = initialState, {type, payload}) => {
   switch (type) {
-    case actionTypes.LOAD_CATEGORIES:
+    case actionTypes.LOAD_CATEGORIES_SUCCESS:
       return {
         ...state,
         items: payload,
         isLoaded: true
       }
+    case actionTypes.LOAD_CATEGORIES_FAILURE:
+        return {
+          ...state,
+          isLoaded: false,
+          error: payload
+        }
     case actionTypes.SET_FILTER:
       return {
         ...state,

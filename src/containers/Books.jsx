@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import Sidebar from "../components/Sidebar"
-import Book from "../components/Book"
+import Book from "../containers/Book"
 import { Container, Grid, Loader } from 'semantic-ui-react'
 
 import { loadBooks, loadMoreBooks } from '../actions/books'

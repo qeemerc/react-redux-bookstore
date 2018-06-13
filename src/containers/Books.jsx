@@ -26,7 +26,7 @@ class Books extends Component {
     const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight
     const pageOffset = window.pageYOffset + window.innerHeight
     const bottomOffset = 10
-    if (pageOffset > lastLiOffset - bottomOffset && !this.props.isLoading) this.props.loadMoreBooks(20)
+    if (!this.props.isLoading && pageOffset > lastLiOffset - bottomOffset ) this.props.loadMoreBooks(20)
   }
 
   renderBooks() {
@@ -58,7 +58,7 @@ class Books extends Component {
     return (
       <div ref={scroller => this.scroller = scroller}>
         <Container>
-          <Grid>
+          <Grid columns="2" stackable={true}>
             <div className="column thirteen wide">
               { this.props.isLoadedBooks ? this.renderBooks() : <Loader active inline='centered' /> }
             </div>

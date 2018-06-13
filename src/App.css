@@ -73,3 +73,15 @@ header a.active {
   text-align: center;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 768px){
+  .book-item{
+    width: 48%;
+    margin: 20px 1%;
+  }
+
+  .latest-book-item{
+    width: 48%;
+    margin: 20px 1%;
+  }
+}

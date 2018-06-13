@@ -17,7 +17,7 @@ export const getCartValue = createSelector(
 )
 
 export const checkBookInCart = createSelector(
-  [ parseCart ],
+  parseCart,
   (count) => count
 )
 

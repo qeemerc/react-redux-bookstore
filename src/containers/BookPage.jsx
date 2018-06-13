@@ -94,7 +94,7 @@ class BookPage extends Component {
     console.log(book)
     return (
       <Container>
-        <Grid>
+        <Grid stackable={true}>
           <div className="column sixteen wide">
             { book && this.renderBookInfo() }
           </div>

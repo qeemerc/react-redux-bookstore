@@ -75,9 +75,7 @@ class BookPage extends Component {
                         </span>
                       </Card.Meta>
                       <Card.Description>
-
                           <Link to={`${book.id}`}><Button>Подробнее</Button></Link>
-
                       </Card.Description>
                     </Card.Content>
                   </Card>

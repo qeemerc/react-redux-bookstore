@@ -5,6 +5,7 @@ export default () => {
   return (
     <Container>
       <h1>Favorites</h1>
+      <p>Not aviable now</p>
     </Container>
   )
 }

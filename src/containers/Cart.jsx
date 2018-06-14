@@ -51,9 +51,18 @@ class Cart extends Component {
                     <Table.Cell>{book.title}</Table.Cell>
                     <Table.Cell>{book.author}</Table.Cell>
                     <Table.Cell textAlign="center">{book.category.map( (category, index) => <Label as='a' key={index}>{category}</Label> )}</Table.Cell>
-                    <Table.Cell><Icon name="star" />{book.rating}</Table.Cell>
-                    <Table.Cell><Icon name="rub" />{book.price}</Table.Cell>
-                    <Table.Cell><Icon name="rub" />{book.count*book.price}</Table.Cell>
+                    <Table.Cell>
+                      <Icon name="star" />
+                      {book.rating}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Icon name="rub" />
+                      {book.price}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Icon name="rub" />
+                      {book.count*book.price}
+                    </Table.Cell>
                     <Table.Cell>
                       <Button onClick={() => removeItem(book.id)} icon>
                         <Icon name="delete" />

@@ -31,7 +31,7 @@ class Books extends Component {
 
   renderBooks() {
 
-    const { books, isLoading, isLoaded } = this.props
+    const { books, isLoading } = this.props
 
     if (books.length < 1) return <p>Ничего не найдено...</p>
 

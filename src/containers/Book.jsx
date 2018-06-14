@@ -28,7 +28,12 @@ const Book = ({ book, addBookToCart, addedBooks}) => {
         </Card.Content>
 
       <Card.Content extra>
-        <Button onClick={() => addBookToCart(book)} primary>Add to cart </Button>
+        <Button 
+          onClick={() => addBookToCart(book)} 
+          primary
+        >
+          Add to cart 
+        </Button>
         <Label color="green">{addedBooks}</Label>
       </Card.Content>
     </Card>

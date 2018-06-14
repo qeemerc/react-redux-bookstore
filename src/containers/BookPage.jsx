@@ -89,7 +89,6 @@ class BookPage extends Component {
 
   render(){
     const { book } = this.props
-    console.log(book)
     return (
       <Container>
         <Grid stackable={true}>

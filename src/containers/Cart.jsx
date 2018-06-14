@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Container, Grid, Table, Button, Image, Label, Icon, Loader } from 'semantic-ui-react'
 import { getCartItems, getTotalCost } from '../selectors/cart'
-import { checkOut, clearCart } from '../actions/cart'
+import { checkOut, clearCart, removeItem } from '../actions/cart'
 
 class Cart extends Component {
 
@@ -16,7 +16,7 @@ class Cart extends Component {
   }
 
   renderCart() {
-    const {items, totalCost, checkOut, clearCart} = this.props
+    const {items, totalCost, checkOut, clearCart, removeItem} = this.props
 
     if (!items) return <Loader active inline='centered' />
 
@@ -35,6 +35,7 @@ class Cart extends Component {
                 <Table.HeaderCell>Рейтинг</Table.HeaderCell>
                 <Table.HeaderCell>Цена</Table.HeaderCell>
                 <Table.HeaderCell>Сумма</Table.HeaderCell>
+                <Table.HeaderCell>Удалить</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
@@ -53,6 +54,11 @@ class Cart extends Component {
                     <Table.Cell><Icon name="star" />{book.rating}</Table.Cell>
                     <Table.Cell><Icon name="rub" />{book.price}</Table.Cell>
                     <Table.Cell><Icon name="rub" />{book.count*book.price}</Table.Cell>
+                    <Table.Cell>
+                      <Button onClick={() => removeItem(book.id)} icon>
+                        <Icon name="delete" />
+                      </Button>
+                    </Table.Cell>
                   </Table.Row>
                 )
               })}
@@ -99,7 +105,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   checkOut,
-  clearCart
+  clearCart,
+  removeItem
 }
 
 

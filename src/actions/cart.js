@@ -26,3 +26,10 @@ export const clearCart = () => dispatch => {
     type: actionTypes.CLEAR_CART
   })
 }
+
+export const removeItem = (id) => dispatch => {
+  dispatch({
+    type: actionTypes.REMOVE_FROM_CART,
+    payload: id
+  })
+}

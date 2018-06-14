@@ -20,6 +20,7 @@ export const CLEAR_FILTER = "CLEAR_FILTER"
 
 export const SEARCH_BOOK = "SEARCH_BOOK"
 
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 
 export const CHECK_OUT = "CHECK_OUT"
 export const CLEAR_CART = "CLEAR_CART"

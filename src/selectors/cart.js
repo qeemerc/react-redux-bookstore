@@ -15,7 +15,12 @@ const parseCart = (cart, {book}) => {
 
 export const getCartValue = createSelector(
   getCartState,
-  (cart) => cart.books.length
+  (cart) => {
+    return cart.books.reduce((count, book) => {
+      count += book.count
+      return count
+    }, 0)
+  }
 )
 
 export const checkBookInCart = createSelector(

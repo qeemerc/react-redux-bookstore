@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Container, Grid, Table, Button, Image, Label, Icon, Loader } from 'semantic-ui-react'
 import { getCartItems, getTotalCost } from '../selectors/cart'
@@ -6,7 +7,7 @@ import { checkOut, clearCart, removeItem } from '../actions/cart'
 
 class Cart extends Component {
 
-  checkBookCount(id) {
+  checkBookCount = (id) => {
     const { items } = this.props
     let count = 0;
     for(let book in items) {
@@ -103,9 +104,15 @@ class Cart extends Component {
       </Container>
     )
   }
-
 }
 
+Cart.propTypes = {
+  items: PropTypes.array.isRequired,
+  totalCost: PropTypes.number.isRequired,
+  checkOut: PropTypes.func.isRequired,
+  clearCart: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired
+}
 
 const mapStateToProps = (state) => ({
   items: getCartItems(state),

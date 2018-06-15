@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, Image, Button, Label, Icon } from 'semantic-ui-react'
@@ -38,6 +39,12 @@ const Book = ({ book, addBookToCart, addedBooks}) => {
       </Card.Content>
     </Card>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  addedBooks: PropTypes.number.isRequired,
+  addBookToCart: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({cart}, book) => ({

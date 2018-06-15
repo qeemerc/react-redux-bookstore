@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchBookById } from '../actions/bookPage'
 import { Link } from 'react-router-dom'
@@ -12,9 +13,10 @@ class BookPage extends Component {
   }
 
   componentDidUpdate() {
-    if(this.props.book) {
-      if (this.props.book.id != (+this.props.match.params.id)){
-        this.props.fetchBookById(this.props.match.params.id)
+    const { book, match, fetchBookById } = this.props
+    if(book) {
+      if (book.id != (+match.params.id)){
+        fetchBookById(match.params.id)
       }
     }
   }
@@ -103,6 +105,12 @@ class BookPage extends Component {
       </Container>
     )
   }
+}
+
+BookPage.propTypes = {
+  book: PropTypes.object,
+  latestBooks: PropTypes.array.isRequired,
+  fetchBookById: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

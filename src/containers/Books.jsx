@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Sidebar from "../components/Sidebar"
@@ -12,21 +13,24 @@ import { searchBook } from '../selectors/books'
 class Books extends Component {
 
   componentDidMount (){
-    this.props.loadBooks()
-    this.props.loadCategories()
+    const { loadBooks, loadCategories } = this.props
+    loadBooks()
+    loadCategories()
     this.scrollBooks = window.addEventListener('scroll', (e) => {
-      if(this.scroller){
+      console.log(this.props.isLoadedBooks, "BOOKS IS LOAD")
+      if(this.props.isLoadedBooks && this.scroller){
         this.handleScroll(e)
       }
     })
   }
 
   handleScroll = (e) => {
+    const { isLoading, loadMoreBooks } = this.props
     const lastLi = document.querySelector("ul > li:last-child")
     const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight
     const pageOffset = window.pageYOffset + window.innerHeight
     const bottomOffset = 10
-    if (!this.props.isLoading && pageOffset > lastLiOffset - bottomOffset ) this.props.loadMoreBooks(20)
+    if (!isLoading && pageOffset > lastLiOffset - bottomOffset ) loadMoreBooks(20)
   }
 
   renderBooks() {
@@ -70,6 +74,16 @@ class Books extends Component {
       </div>
     )
   }
+}
+
+Books.propTypes = {
+  books: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isLoadedBooks: PropTypes.bool.isRequired,
+  isLoadedCategories: PropTypes.bool.isRequired,
+  loadBooks: PropTypes.func.isRequired,
+  loadCategories: PropTypes.func.isRequired,
+  loadMoreBooks: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({

@@ -12,8 +12,9 @@ Bookstore app with React, Redux, Router - [Live Demo](https://react-redux-bookst
 * React
 * Redux
 * React-Router
-* Redux-thunk
-* Redux-logger
+* Redux-Thunk
+* Redux-Logger
+* PropTypes
 * Axios
 * Reselect
 * Semantic UI

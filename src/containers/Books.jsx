@@ -17,7 +17,7 @@ class Books extends Component {
     loadBooks()
     loadCategories()
     this.scrollBooks = window.addEventListener('scroll', (e) => {
-      if(this.props.isLoadedBooks && this.scroller){
+      if(this.props.isLoadedBooks && this.scroller && this.props.books.length > 0){
         this.handleScroll(e)
       }
     })
@@ -62,12 +62,20 @@ class Books extends Component {
       <div ref={scroller => this.scroller = scroller}>
         <Container>
           <Grid columns="2" stackable={true}>
+            { this.props.isMobile && this.props.isLoadedCategories && (
+              <div className="column three wide">
+                <Sidebar />
+              </div>
+            )}
             <div className="column thirteen wide">
               { this.props.isLoadedBooks ? this.renderBooks() : <Loader active inline='centered' /> }
             </div>
-            <div className="column three wide">
-              { this.props.isLoadedCategories && <Sidebar /> }
-            </div>
+            
+              { !this.props.isMobile && this.props.isLoadedCategories && (
+                <div className="column three wide">
+                  <Sidebar />
+                </div>
+                )}
           </Grid>
         </Container>
       </div>
@@ -76,6 +84,7 @@ class Books extends Component {
 }
 
 Books.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   books: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isLoadedBooks: PropTypes.bool.isRequired,
@@ -87,6 +96,7 @@ Books.propTypes = {
 
 const mapStateToProps = (state) => ({
   books: searchBook(state),
+  isMobile: state.settings.isMobile,
   isLoading: state.books.isLoading,
   isLoadedBooks: state.books.isLoaded,
   isLoadedCategories: state.filter.isLoaded

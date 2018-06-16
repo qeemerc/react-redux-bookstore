@@ -17,14 +17,19 @@ class Books extends Component {
     loadBooks()
     loadCategories()
     this.scrollBooks = window.addEventListener('scroll', (e) => {
-      if(this.props.isLoadedBooks && this.scroller && this.props.books.length > 0){
+      if(!this.props.isLoading && this.scroller && this.props.books.length > 0){
         this.handleScroll(e)
       }
     })
   }
 
   handleScroll = (e) => {
-   
+    const { isLoading, loadMoreBooks } = this.props
+    const lastLi = document.querySelector(".ui.cards>.card:last-of-type")
+    const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight
+    const pageOffset = window.pageYOffset + window.innerHeight
+    const bottomOffset = 10
+    if (!isLoading && pageOffset > lastLiOffset - bottomOffset ) loadMoreBooks(20)
   }
 
   renderBooks() {

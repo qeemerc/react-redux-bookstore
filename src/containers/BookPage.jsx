@@ -56,36 +56,36 @@ class BookPage extends Component {
   }
 
   renderBookCopies() {
-    const { book, match, latestBooks } = this.props
+    const { book, match, latestBooks, isMobile } = this.props
     if (!book || book.id != match.params.id ) return false
     return (
-        <ul>
+        <div>
           <p className="latest-book-title">История просмотров</p>
-          { latestBooks.map((book, index) => {
-            if (index <= 2) {
-              return (
-                <li key={index} className="latest-book-item">
-                  <Card>
-                  <Image src={book.image} size="medium" />
-                  <Card.Content>
-                      <Card.Header>
-                        {book.title}
-                      </Card.Header>
-                      <Card.Meta>
-                        <span className='date'>
-                          {book.author}
-                        </span>
-                      </Card.Meta>
-                      <Card.Description>
-                          <Link to={`${book.id}`}><Button>Подробнее</Button></Link>
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
-                </li>
-              )
-            }
-          }) }
-        </ul>
+          <Card.Group itemsPerRow={isMobile ? 2 : 3}>
+            { latestBooks.map((book, index) => {
+              if (index <= 2) {
+                return (
+                  <Card key={index}>
+                    <Image src={book.image} className="latest-book-img" size="medium" />
+                    <Card.Content>
+                        <Card.Header>
+                          {book.title}
+                        </Card.Header>
+                        <Card.Meta>
+                          <span className='date'>
+                            {book.author}
+                          </span>
+                        </Card.Meta>
+                        <Card.Description>
+                            <Link to={`${book.id}`}><Button>Подробнее</Button></Link>
+                        </Card.Description>
+                      </Card.Content>
+                    </Card>
+                )
+              }
+            }) }
+          </Card.Group>
+        </div>
     )
   }
 
@@ -108,12 +108,14 @@ class BookPage extends Component {
 }
 
 BookPage.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   book: PropTypes.object,
   latestBooks: PropTypes.array.isRequired,
   fetchBookById: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
+  isMobile: state.settings.isMobile,
   book: getLoadedBook(state),
   latestBooks: getLatestBooksFromHistory(state)
 })

@@ -45,3 +45,13 @@ header a.active {
   text-align: center;
   font-weight: bold;
 }
+
+.ui.medium.latest-book-img{
+  height: 400px;
+}
+
+@media only screen and (max-width: 768px){
+  .ui.medium.latest-book-img{
+    height: 300px;
+  }
+}

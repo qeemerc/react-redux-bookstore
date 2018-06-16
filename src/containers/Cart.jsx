@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Container, Grid, Table, Button, Image, Label, Icon, Loader } from 'semantic-ui-react'
+import { Container, Grid, Table, Button, Image, Label, Icon } from 'semantic-ui-react'
 import { getCartItems, getTotalCost } from '../selectors/cart'
 import { checkOut, clearCart, removeItem } from '../actions/cart'
 
 class Cart extends Component {
-
-  
 
   renderDesktopCart = () => {
     const {items, totalCost, checkOut, clearCart, removeItem} = this.props

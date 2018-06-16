@@ -1,12 +1,3 @@
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-ul li{
-  list-style-type: none;
-}
-
 .App-header {
   background-color: #222;
   padding: 20px;
@@ -29,27 +20,8 @@ header a.active {
   color: #ffd921;
 }
 
-.book-item{
-  width: 25%;
-  display: inline-block;
-  margin-right: 2.5%;
-  margin-bottom: 25px;
-}
-
-.latest-book-item{
-  width: 30%;
-  text-align: center;
-  display: inline-block;
-  margin-right: 2.5%;
-  margin-bottom: 25px;
-}
-
-.latest-book-item img{
-  max-height: 300px;
-}
-
-.book-item img {
-  max-height: 300px;
+.ui.medium.book-img{
+  height: 300px;
 }
 
 .book-info{
@@ -72,16 +44,4 @@ header a.active {
 .latest-book-title{
   text-align: center;
   font-weight: bold;
-}
-
-@media only screen and (max-width: 768px){
-  .book-item{
-    width: 48%;
-    margin: 20px 1%;
-  }
-
-  .latest-book-item{
-    width: 48%;
-    margin: 20px 1%;
-  }
 }

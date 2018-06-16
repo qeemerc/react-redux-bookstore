@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Sidebar from "../components/Sidebar"
 import Book from "../containers/Book"
-import { Container, Grid, Loader } from 'semantic-ui-react'
+import { Container, Grid, Loader, Card } from 'semantic-ui-react'
 
 import { loadBooks, loadMoreBooks } from '../actions/books'
 import { loadCategories } from '../actions/filter'
@@ -24,35 +24,26 @@ class Books extends Component {
   }
 
   handleScroll = (e) => {
-    const { isLoading, loadMoreBooks } = this.props
-    const lastLi = document.querySelector("ul > li:last-child")
-    const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight
-    const pageOffset = window.pageYOffset + window.innerHeight
-    const bottomOffset = 10
-    if (!isLoading && pageOffset > lastLiOffset - bottomOffset ) loadMoreBooks(20)
+   
   }
 
   renderBooks() {
 
-    const { books, isLoading } = this.props
+    const { books, isLoading, isMobile } = this.props
 
     if (books.length < 1) return <p>Ничего не найдено...</p>
 
     return (
-      <div>
-        <ul>
+      <Card.Group itemsPerRow={ isMobile ? 2 : 4 }>
           { 
             books.map( (book, index) => {
               return (
-                <li key={index} className="book-item">
-                  <Book book={book} />
-                </li>
+                  <Book key={index} book={book} />
               )
             })
           }
-        </ul>
         {isLoading ? <Loader active inline='centered' /> : false}
-      </div>
+      </Card.Group>
   
     )
   }

@@ -9,7 +9,7 @@ import { checkBookInCart } from '../selectors/cart'
 const Book = ({ book, addBookToCart, addedBooks}) => {
   return (
     <Card>
-      <Image src={book.image} size="medium" />
+      <Image className="book-img" src={book.image} size="medium" />
       <Card.Content>
           <Card.Header>
             {book.title}
@@ -23,7 +23,6 @@ const Book = ({ book, addBookToCart, addedBooks}) => {
           <Card.Description>
 
               <Link to={`book/${book.id}`}><Button>Подробнее</Button></Link>
-
 
           </Card.Description>
         </Card.Content>

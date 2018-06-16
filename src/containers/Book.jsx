@@ -18,7 +18,8 @@ const Book = ({ book, addBookToCart, addedBooks}) => {
             <span className='date'>
               {book.author}
             </span>
-            <Icon name="rub" />{book.price}
+            <Icon name="rub" />
+            {book.price}
           </Card.Meta>
           <Card.Description>
 

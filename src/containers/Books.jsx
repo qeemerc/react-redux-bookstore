@@ -36,14 +36,14 @@ class Books extends Component {
 
     const { books, isLoading, isMobile } = this.props
 
-    if (books.length < 1) return <p>Ничего не найдено...</p>
+    if (!books.length) return <p>Ничего не найдено...</p>
 
     return (
       <Card.Group itemsPerRow={ isMobile ? 2 : 4 }>
           { 
             books.map( (book, index) => {
               return (
-                  <Book key={index} book={book} />
+                <Book key={index} book={book} />
               )
             })
           }

@@ -10,7 +10,7 @@ class Cart extends Component {
   renderDesktopCart = () => {
     const {items, totalCost, checkOut, clearCart, removeItem} = this.props
 
-    if (items.length < 1) return <p>Корзина пуста...</p>
+    if (!items.length) return <p>Корзина пуста...</p>
 
     return (
         <div className="cart-info">
@@ -84,7 +84,7 @@ class Cart extends Component {
   renderMobileCart = () => {
     const {items, totalCost, checkOut, clearCart, removeItem} = this.props
 
-    if (items.length < 1) return <p>Корзина пуста...</p>
+    if (!items.length) return <p>Корзина пуста...</p>
 
     return (
         <div className="cart-info">
@@ -94,41 +94,50 @@ class Cart extends Component {
 
               {items.map( (book, index) => {
                 return (
-                  
-                <Table.Row key={index}>
+                  <Table.Row key={index}>
+                      <Table.Cell>
+                        <Image size="small" centered src={book.image} />
+                      </Table.Cell>
+                    <Table.Cell>{book.title}</Table.Cell>
+                    <Table.Cell>{book.author}</Table.Cell>
+                    <Table.Cell>Количество: {book.count}</Table.Cell>
                     <Table.Cell>
-                      <Image size="small" centered src={book.image} />
+                      Итого:  {book.count*book.price}
+                              <Icon name="rub" />
                     </Table.Cell>
-                  <Table.Cell>{book.title}</Table.Cell>
-                  <Table.Cell>{book.author}</Table.Cell>
-                  <Table.Cell>Количество: {book.count}</Table.Cell>
-                  <Table.Cell>
-                    Итого:  {book.count*book.price}
-                            <Icon name="rub" />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Button onClick={() => removeItem(book.id)} icon>
-                      <Icon name="delete" />
-                    </Button>
-                  </Table.Cell>
-                </Table.Row>
-                    
+                    <Table.Cell>
+                      <Button onClick={() => removeItem(book.id)} icon>
+                        <Icon name="delete" />
+                      </Button>
+                    </Table.Cell>
+                  </Table.Row>    
                 )
               })}
 
-          </Table.Body>
-        </Table>
+            </Table.Body>
+          </Table>
 
           <div className="total">
             <Label>
-              <Icon name='rub' /> Total: {totalCost}
+              <Icon name='rub' /> 
+              Total: {totalCost}
             </Label>
           </div>
 
           <Button.Group>
-            <Button onClick={() => checkOut(items)} positive>Оформить заказ</Button>
+            <Button 
+              onClick={() => checkOut(items)} 
+              positive
+            >
+              Оформить заказ
+            </Button>
             <Button.Or />
-            <Button onClick={clearCart} negative>Очистить коризну</Button>
+            <Button 
+              onClick={clearCart}
+              negative
+            >
+              Очистить коризну
+            </Button>
           </Button.Group>
 
         </div>

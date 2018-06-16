@@ -17,7 +17,6 @@ class Books extends Component {
     loadBooks()
     loadCategories()
     this.scrollBooks = window.addEventListener('scroll', (e) => {
-      console.log(this.props.isLoadedBooks, "BOOKS IS LOAD")
       if(this.props.isLoadedBooks && this.scroller){
         this.handleScroll(e)
       }

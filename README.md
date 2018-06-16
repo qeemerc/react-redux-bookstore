@@ -4,6 +4,7 @@ Bookstore app with React, Redux, Router - [Live Demo](https://react-redux-bookst
 **Features:**
 
 * MockApi
+* Adaptive (>= 500px width)
 * Infinity load
 * Filter by caregory and name
 
